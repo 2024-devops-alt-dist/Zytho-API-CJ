@@ -28,7 +28,7 @@ Si vous utilisez Docker, la base de données PostgreSQL sera lancée via Docker 
 
 #### Exemple de fichier `.env` :
 ```
-DB_HOST=localhost
+DB_HOST=db
 DB_USER=postgres
 DB_PASSWORD=postgres
 DB_NAME=my_database
@@ -37,31 +37,28 @@ DB_PORT=5432
 
 ## Démarrage
 
-### 1. Démarrez la bdd PostgreSQL 
-Si vous utilisez Docker pour la bdd, exécutez la commande suivante :
+### 1. Exécutez le serveur et la bdd PostgreSQL 
 
-`docker-compose up -d`
+`docker compose up --build`
 
-### 2. Exécutez le serveur
+### 2. Créer repectoire BDD
 
-Démarrez le serveur Express :
-
-`npm run dev`
+Dans Dbeaver, créer le repertoire qui va réceptionner notre bdd
 
 Le serveur accessible sur `http://localhost:3000`.
 
 ## API
-### Tester
+### 1. Tester
 Via POSTMAN 
 ou
-Via SwaggerUi : http://localhost:3000/api-docs/
+avec SwaggerUi : http://localhost:3000/api-docs/.
 
-### Endpoints disponibles : 
-#### 1. Beers :
+### 2. Endpoints disponibles : 
+#### 2.1. Beers :
 
-***GET /beers***: http://localhost:3000/api/v1/beers
-***GET /beers/{id}***: http://localhost:3000/api/v1/beers/12
-***POST /beers***: http://localhost:3000/api/v1/beers
+***GET /beers***: http://localhost:3000/api/v1/beers.
+***GET /beers/{id}***: http://localhost:3000/api/v1/beers/12.
+***POST /beers***: http://localhost:3000/api/v1/beers.
 Exemple:
 ```
 {
@@ -72,7 +69,7 @@ Exemple:
     "brewery_id": 2
 }
 ```
-***PUT /beers/{id}***: http://localhost:3000/api/v1/beers/10
+***PUT /beers/{id}***: http://localhost:3000/api/v1/beers/10.
 Exemple:
 ```
 {
@@ -81,13 +78,13 @@ Exemple:
     "alcool_pourcent": 18.0
 }
 ```
-***DELETE /beers/{id}***: http://localhost:3000/api/v1/beers/28
+***DELETE /beers/{id}***: http://localhost:3000/api/v1/beers/28.
 
-#### 2. Breweries :
+#### 2.2. Breweries :
 
-***GET /breweries***: http://localhost:3000/api/v1/breweries
-***GET /breweries/{id}***: http://localhost:3000/api/v1/breweries/3
-***POST /breweries***: http://localhost:3000/api/v1/breweries
+***GET /breweries***: http://localhost:3000/api/v1/breweries.
+***GET /breweries/{id}***: http://localhost:3000/api/v1/breweries/3.
+***POST /breweries***: http://localhost:3000/api/v1/breweries.
 Exemple:
 ```
 {
@@ -99,7 +96,7 @@ Exemple:
     "url_social_media": "TEST ADD BREWERY"
 }
 ```
-***PUT /breweries/{id}***: http://localhost:3000/api/v1/breweries/5
+***PUT /breweries/{id}***: http://localhost:3000/api/v1/breweries/5.
 Exemple:
 ```
 {
@@ -111,7 +108,88 @@ Exemple:
     "url_social_media": "TEST UPDATE BREWERY"
 }
 ```
-***DELETE /breweries/{id}***: http://localhost:3000/api/v1/breweries/10
+***DELETE /breweries/{id}***: http://localhost:3000/api/v1/breweries/10.
+
+#### 2.3. Users :
+
+***GET /users***: http://localhost:3000/api/v1/users.
+***GET /users/{id}***: http://localhost:3000/api/v1/users/6.
+***POST /users***: http://localhost:3000/api/v1/users.
+Exemple:
+```
+{
+    "firstname": "Test ADD USER",
+    "email": "testAdd@user.fr",
+    "password": "123456789"
+}
+```
+***PUT /users/{id}***: http://localhost:3000/api/v1/users/5.
+Exemple:
+```
+{
+    "firstname": "Test UPDATE USER",
+    "email": "updateTes@user.fr",
+    "password": "123456789"
+}
+```
+***DELETE /users/{id}***: http://localhost:3000/api/v1/users/8.
+
+#### 2.4. Details_beer :
+***GET /details_beer***: http://localhost:3000/api/v1/details_beer.
+***GET /details_beer/{id}***: http://localhost:3000/api/v1/details_beer/6.
+***POST /details_beer***: http://localhost:3000/api/v1/details_beer.
+Exemple:
+```
+{
+    "description": "ADD NEW DETAILS BEER",
+    "color": "ADD NEW",
+    "pays": "ADD NEW",
+    "amertume": 2,
+    "douceur": 4,
+    "fruite": 3,
+    "fermentation": "ADD NEW",
+    "conditionnement": "ADD NEW",
+    "contenance": 33,
+    "ibu": 15,
+    "ebc": 10
+}
+```
+***PUT /details_beer/{id}***: http://localhost:3000/api/v1/details_beer/3.
+Exemple:
+```
+{
+    {
+    "description": "UPDATE DETAILS BEER",
+    "color": "UPDATE NEW",
+    "pays": "UPDATE NEW",
+    "amertume": 2,
+    "douceur": 4,
+    "fruite": 3,
+    "fermentation": "UPDATE NEW",
+    "conditionnement": "UPDATE NEW",
+    "contenance": 33,
+    "ibu": 15,
+    "ebc": 10
+}
+}
+```
+***DELETE /details_beer/{id}***: http://localhost:3000/api/v1/details_beer/4.
+
+#### 2.5. Category :
+***GET /categories***: http://localhost:3000/api/v1/categories.
+***GET /categories/{id}***: http://localhost:3000/api/v1/categories/5.
+***POST /categories***: http://localhost:3000/api/v1/categories.
+***PUT /categories/{id}***: http://localhost:3000/api/v1/categories/5.
+***DELETE /categories/{id}***: http://localhost:3000/api/v1/categories/11.
+
+#### 2.6. Ingredient :
+***GET /ingredients***: http://localhost:3000/api/v1/ingredients.
+***GET /ingredients/{id}***: http://localhost:3000/api/v1/ingredients/1.
+***POST /ingredients***: http://localhost:3000/api/v1/ingredients.
+***PUT /ingredients/{id}***: http://localhost:3000/api/v1/ingredients/5.
+***DELETE /ingredients/{id}***: http://localhost:3000/api/v1/ingredients/15.
+
+#### 2.7. Picture :
 
 ### Documentation swagger
 Voir : 

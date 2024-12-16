@@ -122,6 +122,7 @@ router.put("/:id", beersController.update);
  * /beers/{id}:
  *   delete:
  *     summary: Supprimer une bière par son ID
+ *     description: ⚠️ supprimer la bières supprimera aussi la fiche détail associé à cette dernière.
  *     tags:
  *       - Beers
  *     parameters:

@@ -127,6 +127,7 @@ router.put("/:id", breweryController.update);
  * /breweries/{id}:
  *   delete:
  *     summary: Supprimer une brasserie par son ID
+ *     description: ⚠️ supprimer la brasserie supprimera aussi toutes les bière associé à cette dernière.
  *     tags:
  *       - Brewery
  *     parameters:

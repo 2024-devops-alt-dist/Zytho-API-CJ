@@ -78,7 +78,7 @@ create table Beer_Category (
     id serial primary key,
     beer_id INT not null,
     category_id INT not null,
-    constraint fk_beer foreign key (beer_id) references Beer(id),
+    constraint fk_beer foreign key (beer_id) references Beer(id) on delete cascade,
     constraint fk_category foreign key (category_id) references Category(id),
     constraint unique_beer_category unique (beer_id, category_id)
 );
@@ -156,7 +156,7 @@ create table Beer_Ingredient (
     id serial primary key,
     beer_id INT not null,
     ingredient_id INT not null,
-    constraint fk_beer foreign key(beer_id) references Beer(id),
+    constraint fk_beer foreign key(beer_id) references Beer(id) on delete cascade,
     constraint fk_ingredient foreign key(ingredient_id) references Ingredient(id)
 );
 

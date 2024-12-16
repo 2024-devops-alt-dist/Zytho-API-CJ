@@ -103,7 +103,7 @@ export const beersController = {
                 res.status(404).json({ error: `Bière avec l'ID ${id} introuvable.` });
                 return;
             }
-    
+
             // Suppression de la bière
             await pool.query("DELETE FROM beer WHERE id = $1", [id]);
     
