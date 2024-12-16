@@ -57,7 +57,9 @@ avec SwaggerUi : http://localhost:3000/api-docs/.
 #### 2.1. Beers :
 
 ***GET /beers***: http://localhost:3000/api/v1/beers.
+
 ***GET /beers/{id}***: http://localhost:3000/api/v1/beers/12.
+
 ***POST /beers***: http://localhost:3000/api/v1/beers.
 Exemple:
 ```
@@ -83,8 +85,11 @@ Exemple:
 #### 2.2. Breweries :
 
 ***GET /breweries***: http://localhost:3000/api/v1/breweries.
+
 ***GET /breweries/{id}***: http://localhost:3000/api/v1/breweries/3.
+
 ***POST /breweries***: http://localhost:3000/api/v1/breweries.
+
 Exemple:
 ```
 {
@@ -96,7 +101,8 @@ Exemple:
     "url_social_media": "TEST ADD BREWERY"
 }
 ```
-***PUT /breweries/{id}***: http://localhost:3000/api/v1/breweries/5.
+***PUT /breweries/{id}***: http://localhost:3000/api/v1/breweries/5.*
+
 Exemple:
 ```
 {
@@ -113,8 +119,11 @@ Exemple:
 #### 2.3. Users :
 
 ***GET /users***: http://localhost:3000/api/v1/users.
+
 ***GET /users/{id}***: http://localhost:3000/api/v1/users/6.
+
 ***POST /users***: http://localhost:3000/api/v1/users.
+
 Exemple:
 ```
 {
@@ -124,6 +133,7 @@ Exemple:
 }
 ```
 ***PUT /users/{id}***: http://localhost:3000/api/v1/users/5.
+
 Exemple:
 ```
 {
@@ -136,8 +146,11 @@ Exemple:
 
 #### 2.4. Details_beer :
 ***GET /details_beer***: http://localhost:3000/api/v1/details_beer.
+
 ***GET /details_beer/{id}***: http://localhost:3000/api/v1/details_beer/6.
+
 ***POST /details_beer***: http://localhost:3000/api/v1/details_beer.
+
 Exemple:
 ```
 {
@@ -155,6 +168,7 @@ Exemple:
 }
 ```
 ***PUT /details_beer/{id}***: http://localhost:3000/api/v1/details_beer/3.
+
 Exemple:
 ```
 {
@@ -177,19 +191,26 @@ Exemple:
 
 #### 2.5. Category :
 ***GET /categories***: http://localhost:3000/api/v1/categories.
+
 ***GET /categories/{id}***: http://localhost:3000/api/v1/categories/5.
+
 ***POST /categories***: http://localhost:3000/api/v1/categories.
+
 ***PUT /categories/{id}***: http://localhost:3000/api/v1/categories/5.
+
 ***DELETE /categories/{id}***: http://localhost:3000/api/v1/categories/11.
+
 
 #### 2.6. Ingredient :
 ***GET /ingredients***: http://localhost:3000/api/v1/ingredients.
-***GET /ingredients/{id}***: http://localhost:3000/api/v1/ingredients/1.
-***POST /ingredients***: http://localhost:3000/api/v1/ingredients.
-***PUT /ingredients/{id}***: http://localhost:3000/api/v1/ingredients/5.
-***DELETE /ingredients/{id}***: http://localhost:3000/api/v1/ingredients/15.
 
-#### 2.7. Picture :
+***GET /ingredients/{id}***: http://localhost:3000/api/v1/ingredients/1.
+
+***POST /ingredients***: http://localhost:3000/api/v1/ingredients.
+
+***PUT /ingredients/{id}***: http://localhost:3000/api/v1/ingredients/5.
+
+***DELETE /ingredients/{id}***: http://localhost:3000/api/v1/ingredients/15.
 
 ### Documentation swagger
 Voir : 
