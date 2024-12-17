@@ -10,30 +10,9 @@ En utilisant la base de données créée selon les spécifications du brief pré
 
 ## Installation
 
-### 1. Clonez le projet
-
 Clonez ce repository sur votre machine locale en utilisant Git :
 
 `git clone https://github.com/2024-devops-alt-dist/Zytho-API-CJ.git`
-
-### 2. Installez les dépendances
-
-Installez les dépendances du projet avec npm :
-
-`npm install`
-
-### 3. Configurez la base de données PostgreSQL
-
-Si vous utilisez Docker, la base de données PostgreSQL sera lancée via Docker Compose. Assurez-vous que vous avez configuré votre fichier `.env` pour correspondre à votre base de données :
-
-#### Exemple de fichier `.env` :
-```
-DB_HOST=db
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_NAME=my_database
-DB_PORT=5432
-```
 
 ## Démarrage
 
