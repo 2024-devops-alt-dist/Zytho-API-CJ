@@ -19,6 +19,9 @@ Clonez ce repository sur votre machine locale en utilisant Git :
 ### 1. Exécutez le serveur et la bdd PostgreSQL 
 
 `docker compose up --build`
+puis 
+`docker compose up`
+
 
 ### 2. Créer repectoire BDD
 

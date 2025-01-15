@@ -10,7 +10,7 @@ export const breweryController = {
                 res.status(404).json({ error: "Aucune brasserie trouvée." });
                 return;
             }
-            res.status(200).json({ breweries: result.rows });
+            res.status(200).json(result.rows);
         } catch (error) {
             console.error("Erreur lors de la récupération des brasseries.", error);
             res.status(500).json({ error: "Erreur lors de la récupération des brasseries." });
@@ -24,15 +24,17 @@ export const breweryController = {
     
             if (result.rows.length === 0) {
                 res.status(404).json({ error: `Brasserie avec l'ID ${id} introuvable` });
-                return; 
+                return;
             }
     
-            res.status(200).json({ brewery: result.rows[0] });
+            // Retourne directement l'objet, sans l'encapsuler dans une clé "brewery"
+            res.status(200).json(result.rows[0]);
         } catch (error) {
             console.error(`Erreur lors de la récupération de la brasserie ${id}.`, error);
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
     },
+    
     
     create: async (req: Request, res: Response): Promise<void> => {
         const { name, address, country, description, schedules, url_social_media }: Brewery = req.body;
