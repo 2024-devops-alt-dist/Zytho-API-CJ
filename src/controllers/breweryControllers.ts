@@ -20,21 +20,51 @@ export const breweryController = {
     getById: async (req: Request, res: Response): Promise<void> => {
         const { id } = req.params;
         try {
-            const result = await pool.query("SELECT * FROM brewery WHERE id = $1", [id]);
+            // Récupération des détails de la brasserie
+            const breweryResult = await pool.query("SELECT * FROM brewery WHERE id = $1", [id]);
     
-            if (result.rows.length === 0) {
+            if (breweryResult.rows.length === 0) {
                 res.status(404).json({ error: `Brasserie avec l'ID ${id} introuvable` });
                 return;
             }
     
-            // Retourne directement l'objet, sans l'encapsuler dans une clé "brewery"
-            res.status(200).json(result.rows[0]);
+            const brewery = breweryResult.rows[0];
+    
+            // Récupération des bières associées
+            const beersResult = await pool.query("SELECT * FROM beer WHERE brewery_id = $1", [id]);
+            const beers = beersResult.rows.map((beer: any) => ({
+                id: beer.id,
+                name: beer.name,
+                type: beer.type,
+                alcool_pourcent: beer.alcool_pourcent,
+                brewery: {
+                    id: brewery.id,
+                    name: brewery.name,
+                    address: brewery.address,
+                    country: brewery.country,
+                    description: brewery.description,
+                    schedules: brewery.schedules,
+                    url_social_media: brewery.url_social_media
+                },
+                details_beer: {} // Vous pouvez remplir cet objet selon la structure de vos détails de bière
+            }));
+    
+            // Retourner les détails de la brasserie et les bières associées
+            res.status(200).json({
+                id: brewery.id,
+                name: brewery.name,
+                address: brewery.address,
+                country: brewery.country,
+                description: brewery.description,
+                schedules: brewery.schedules,
+                url_social_media: brewery.url_social_media,
+                beers: beers
+            });
         } catch (error) {
             console.error(`Erreur lors de la récupération de la brasserie ${id}.`, error);
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
-    },
-    
+    },    
     
     create: async (req: Request, res: Response): Promise<void> => {
         const { name, address, country, description, schedules, url_social_media }: Brewery = req.body;
