@@ -5,17 +5,43 @@ import { Brewery } from "../models/brewery";
 export const breweryController = {
     getAll: async (req: Request, res: Response): Promise<void> => {
         try {
-            const result = await pool.query("SELECT * FROM brewery");
+            // Requête SQL avec une jointure pour récupérer les bières associées à chaque brasserie
+            const result = await pool.query(`
+                SELECT 
+                    b.id,
+                    b.name,
+                    b.address,
+                    b.country,
+                    b.description,
+                    b.schedules,
+                    b.url_social_media,
+                    json_agg(
+                        json_build_object(
+                            'id', beer.id,
+                            'name', beer.name,
+                            'type', beer.type,
+                            'alcool_pourcent', beer.alcool_pourcent
+                        )
+                    ) AS beers
+                FROM brewery b
+                LEFT JOIN beer beer ON b.id = beer.brewery_id
+                GROUP BY b.id
+                ORDER BY b.id ASC
+            `);
+    
             if (result.rows.length === 0) {
                 res.status(404).json({ error: "Aucune brasserie trouvée." });
                 return;
             }
+    
+            // Retourner les résultats avec les bières incluses pour chaque brasserie
             res.status(200).json(result.rows);
         } catch (error) {
             console.error("Erreur lors de la récupération des brasseries.", error);
             res.status(500).json({ error: "Erreur lors de la récupération des brasseries." });
         }
     },
+    
 
     getById: async (req: Request, res: Response): Promise<void> => {
         const { id } = req.params;
