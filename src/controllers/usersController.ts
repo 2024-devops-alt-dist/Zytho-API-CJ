@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { pool } from "../data/config";
 import { Users } from "../models/users";
+import crypto from "crypto";
 
 export const usersController = {
     getAll: async (req: Request, res: Response): Promise<void> => {
@@ -37,28 +38,54 @@ export const usersController = {
     create: async (req: Request, res: Response): Promise<void> => {
         const { firstname, email, password }: Users = req.body;
     
-        // Vérification des données nécessaires
         if (!firstname || !email || !password) {
             res.status(400).json({ error: "Tous les champs sont requis." });
             return;
         }
     
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            res.status(400).json({ error: "L'email doit être au format valide (ex: example@domain.com)." });
+            return;
+        }
+    
+        if (password.length < 8) {
+            res.status(400).json({ error: "Le mot de passe doit contenir au moins 8 caractères." });
+            return;
+        }
+    
         try {
-            // Requête SQL correcte pour insérer un nouvel utilisateur
+            // Vérifier si l'e-mail existe déjà
+            const emailExists = await pool.query(`SELECT id FROM users WHERE email = $1`, [email]);
+
+            // rowCount ne peut jamais être null, mais par précaution :
+            if (emailExists?.rowCount && emailExists.rowCount > 0) {
+                res.status(400).json({ error: "Un compte avec cet email existe déjà." });
+                return;
+            }
+
+            // Génère un sel unique pour chaque utilisateur
+            const salt = crypto.randomBytes(16).toString("hex");
+
+            // Hash le mot de passe avec le sel
+            const hashedPassword = `${salt}:${crypto
+                .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+                .toString("hex")}`;
+
             const result = await pool.query(
                 `INSERT INTO users (firstname, email, password)
                 VALUES ($1, $2, $3)
                 RETURNING *`, 
-                [firstname, email, password]
+                [firstname, email, hashedPassword]
             );
     
-            // Retourner le user créée avec son id généré
             res.status(201).json({ user: result.rows[0] });
         } catch (error) {
             console.error("Erreur lors de la création de l'utilisateur.", error);
-            res.status(500).json({ error: "description: Données invalides ou mot de passe trop court (au moins 8 caractères)." });
+            res.status(500).json({ error: "Erreur interne du serveur." });
         }
     },
+    
 
     update: async (req: Request, res: Response): Promise<void> => {
         const { id } = req.params;
