@@ -232,13 +232,10 @@ export const beersController = {
                 return;
             }
 
-             // Suppression des détails associés à la bière
-            await pool.query("DELETE FROM details_beer WHERE beer_id = $1", [id]);
-
             // Suppression de la bière
             await pool.query("DELETE FROM beer WHERE id = $1", [id]);
     
-            res.status(200).json({ message: `Bière avec l'ID ${id} et ses détails supprimés avec succès.` });
+            res.status(200).json({ message: `Bière avec l'ID ${id} supprimée avec succès.` });
         } catch (error) {
             console.error(`Erreur lors de la suppression de la bière ${id}.`, error);
             res.status(500).json({ error: "Erreur interne du serveur." });
