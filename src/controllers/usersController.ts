@@ -55,7 +55,6 @@ export const usersController = {
         }
     
         try {
-            // Vérifier si l'e-mail existe déjà
             const emailExists = await pool.query(`SELECT id FROM users WHERE email = $1`, [email]);
 
             // rowCount ne peut jamais être null, mais par précaution :
@@ -67,7 +66,6 @@ export const usersController = {
             // Génère un sel unique pour chaque utilisateur
             const salt = crypto.randomBytes(16).toString("hex");
 
-            // Hash le mot de passe avec le sel
             const hashedPassword = `${salt}:${crypto
                 .pbkdf2Sync(password, salt, 1000, 64, "sha512")
                 .toString("hex")}`;
