@@ -11,11 +11,6 @@ const options = {
             version: "1.0.0",
             description: "API - Référencement des bières artisanales et de leurs brasseries.",
         },
-        servers: [
-            {
-                url: "http://localhost:3000/api/v1",
-            },
-        ],
     },
     apis: ["./src/routes/*.ts"], 
 };

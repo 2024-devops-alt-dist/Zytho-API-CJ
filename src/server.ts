@@ -14,7 +14,7 @@ const startServer = async (): Promise<void> => {
         // Démarre le serveur uniquement si la connexion réussit
         const PORT = process.env.PORT || 3000;
         app.listen(PORT, () => {
-            console.log(`🚀 Le serveur fonctionne : http://localhost:${PORT}`);
+            console.log(`🚀 Le serveur fonctionne : ${PORT}`);
         });
     } catch (err) {
         console.error("❌ Le serveur n'a pas pu démarrer :", err);
