@@ -20,7 +20,9 @@ const path = `/api/${version}`;
 const URL_FRONT = process.env.FRONT_URL;
 // Middleware pour autoriser les requêtes CORS
 app.use(cors({
-    origin: URL_FRONT, // Remplace par l'URL de ton frontend (React)
+    origin: URL_FRONT,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
+    credentials: true,
 }));
 
 // Middleware pour parser le JSON dans les requêtes

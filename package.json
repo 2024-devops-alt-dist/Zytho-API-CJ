@@ -4,9 +4,10 @@
   "description": "Après la mise en place de notre base de données pleine d'infos sur les bières artisanales, il est temps de s'attaquer à la prochaine étape : le développement de l'API.",
   "main": "server.ts",
   "scripts": {
+    "start": "ts-node src/server.ts",
     "dev": "ts-node-dev src/server.ts",
     "clean": "rm -rf dist",
-    "build": "npm run clean && npx tsc"
+    "build": "tsc"
   },
   "keywords": [
     "api",
