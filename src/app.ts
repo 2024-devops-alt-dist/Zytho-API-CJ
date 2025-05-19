@@ -17,10 +17,9 @@ import cors from 'cors';
 const version = "v1";
 const path = `/api/${version}`;
 
-const URL_FRONT = process.env.FRONT_URL;
 // Middleware pour autoriser les requêtes CORS
 app.use(cors({
-    origin: URL_FRONT,
+    origin: process.env.FRONT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
     credentials: true,
 }));
