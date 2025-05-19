@@ -19,9 +19,16 @@ const path = `/api/${version}`;
 
 // Middleware pour autoriser les requêtes CORS
 app.use(cors({
-    origin: process.env.FRONT_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
-    credentials: true,
+  origin: (origin, callback) => {
+    const allowedOrigins = ['https://zytho-front-cj.onrender.com', 'http://localhost:5173'];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  credentials: true,
 }));
 
 // Middleware pour parser le JSON dans les requêtes
