@@ -19,7 +19,7 @@ const path = `/api/${version}`;
 
 // Middleware pour autoriser les requêtes CORS
 app.use(cors({
-    origin: process.env.VITE_API_URL,
+    origin: process.env.FRONT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
     credentials: true,
 }));
